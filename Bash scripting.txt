@@ -1,0 +1,83 @@
+#!/bin/bash
+
+exit=1
+menuItems=( "0-Tikka-300RS" "1-Juice-20RS" "2-Briyani-200RS" "3-Salad-50RS" "4-Steak-500RS" "5-PaniPuri-100RS" "6-Naan-30RS" "7-ChickenKarahi-400RS" "8-Mutton-600RS" "9-BeefPalao-150RS")
+cart=()
+totalAmount=0
+taxAmount=0
+totalBill=0
+
+while [ $exit -eq 1 ]
+do
+	echo ""
+	for i in ${menuItems[@]}
+	do
+		echo $i
+	done
+
+	echo ""
+	
+	read -p "Select the item to add to your cart: " itemNumber
+	
+	if [ $itemNumber -eq 0 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+300
+	elif [ $itemNumber -eq 1 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+20
+	elif [ $itemNumber -eq 2 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+200
+	elif [ $itemNumber -eq 3 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+50
+	elif [ $itemNumber -eq 4 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+500
+	elif [ $itemNumber -eq 5 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+100
+	elif [ $itemNumber -eq 6 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+30
+	elif [ $itemNumber -eq 7 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+400
+	elif [ $itemNumber -eq 8 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+600
+	elif [ $itemNumber -eq 9 ]
+	then
+		cart+=(${menuItems[$itemNumber]})
+		let totalAmount=totalAmount+150
+	else
+		echo "Incorrect option is selected"
+	fi
+	read -p "Press 1 to continue: " exit
+
+done
+
+echo ""
+echo "Your cart items:"
+for i in ${cart[@]}
+do
+	echo $i
+done
+
+echo ""
+echo "Your total sum: " $totalAmount
+
+taxAmount=$(((17*$totalAmount)/100))
+totalBill=$((totalAmount+taxAmount))
+
+echo "Tax Amount (GST 17%): " $taxAmount
+echo "Total Bill: " $totalBill
